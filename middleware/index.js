@@ -1,4 +1,4 @@
-var Campground = require("../models/campgrounds");
+var Photo = require("../models/photos");
 var Comment = require("../models/comment");
 // all the middleware goes here
 var middlewareObj = {};
@@ -24,22 +24,22 @@ middlewareObj.checkCommentOwnership = function(req, res, next) {
     }
 }
     
-middlewareObj.checkCampgroundOwnership = function(req, res, next) {
+middlewareObj.checkPhotoOwnership = function(req, res, next) {
  if(req.isAuthenticated()){
-        Campground.findById(req.params.id, function(err, foundCampground){
+        Photo.findById(req.params.id, function(err, foundPhoto){
            if(err){
-               req.flash("error", "Campground not found");
+               req.flash("error", "Photo not found");
                res.redirect("back");
            }  else {
  
-            // Added this block, to check if foundCampground exists, and if it doesn't to throw an error via connect-flash and send us back to the homepage
-            if (!foundCampground) {
+            // Added this block, to check if foundPhoto exists, and if it doesn't to throw an error via connect-flash and send us back to the homepage
+            if (!foundPhoto) {
                     req.flash("error", "Item not found.");
                     return res.redirect("back");
                 }
             // If the upper condition is true this will break out of the middleware and prevent the code below to crash our application
  
-            if(foundCampground.author.id.equals(req.user._id)) {
+            if(foundPhoto.author.id.equals(req.user._id)) {
                 next();
             } else {
                 req.flash("error", "You don't have permission to do that");

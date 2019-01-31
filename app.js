@@ -2,8 +2,7 @@ var express = require("express");
 var app = express();
 var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
-var Campground = require("./models/campgrounds");
-var seedDB = require("./seeds");
+var Photo = require("./models/photos");
 var Comment = require("./models/comment");
 var passport = require("passport");
 var LocalStrategy = require("passport-local");
@@ -13,7 +12,7 @@ var flash = require("connect-flash");
 
 //requiring routes
 var commentRoutes       = require("./routes/comments"),
-    campgroundRoutes    = require("./routes/campgrounds"),
+    photoRoutes    = require("./routes/photos"),
     indexRoutes         = require("./routes/index")
 
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
@@ -44,9 +43,9 @@ app.use(function(req, res, next){
 });
 
 app.use("/", indexRoutes);
-app.use("/campgrounds/:id/comments/", commentRoutes);
-app.use("/campgrounds", campgroundRoutes);
+app.use("/photos/:id/comments/", commentRoutes);
+app.use("/photos", photoRoutes);
 
 app.listen(process.env.PORT, process.env.IP, function(){
-   console.log("the yelpcamp server has started!"); 
+   console.log("the photo server has started!"); 
 });
