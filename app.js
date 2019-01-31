@@ -17,8 +17,6 @@ var commentRoutes       = require("./routes/comments"),
     indexRoutes         = require("./routes/index")
 
 mongoose.connect(process.env.DATABASEURL, { useNewUrlParser: true });
-//mongoose.connect('mongodb://josh:Celtic11@ds245971.mlab.com:45971/imagesite', { useNewUrlParser: true });
-
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
