@@ -25,7 +25,7 @@ app.use(flash());
 
 // PASSPORT CONFIGURATION
 app.use(require("express-session")({
-    secret: "once again rusty wins cutest dog!",
+    secret: "secret secret",
     resave: false,
     saveUninitialized: false
 }));
